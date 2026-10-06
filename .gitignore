@@ -41,3 +41,7 @@ app-example
 # generated native folders
 /ios
 /android
+   # OpenCode config (may contain access tokens) and QR images
+   opencode.json
+   expo-qr.png
+   expo-qr-fresh.png

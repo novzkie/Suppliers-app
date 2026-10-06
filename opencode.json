@@ -1,0 +1,24 @@
+{
+  "mcp": {
+    "servers": {
+      "figma": {
+        "environment": {
+          "FIGMA_API_KEY": "figd_vcfwGDEcSTvdtU32ohbUqXe3fKerqA_1_ppF5hOs"
+        },
+        "timeout": {
+          "startup": 60000
+        },
+        "type": "local",
+        "command": [
+          "cmd",
+          "/c",
+          "npx",
+          "-y",
+          "figma-developer-mcp",
+          "--stdio"
+        ]
+      }
+    }
+  },
+  "$schema": "https://opencode.ai/config.json"
+}

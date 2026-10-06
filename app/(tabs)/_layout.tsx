@@ -1,35 +1,48 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
+import { StyleSheet } from 'react-native';
 
 import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { TabIcon } from '@/components/ui';
+import type { IconSymbolName } from '@/components/ui/icon-symbol';
+import { Palette, Font } from '@/constants/theme';
+
+function tab(name: IconSymbolName, title: string) {
+  return {
+    title,
+    tabBarIcon: ({ focused }: { focused: boolean }) => <TabIcon name={name} focused={focused} />,
+  };
+}
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
         tabBarButton: HapticTab,
+        tabBarActiveTintColor: Palette.ink,
+        tabBarInactiveTintColor: Palette.muted,
+        tabBarLabelStyle: styles.label,
+        tabBarStyle: styles.bar,
       }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
+      <Tabs.Screen name="index" options={tab('house.fill', 'Home')} />
+      <Tabs.Screen name="inventory" options={tab('cube.fill', 'Inventory')} />
+      <Tabs.Screen name="pos" options={tab('cart.fill', 'POS')} />
+      <Tabs.Screen name="payment" options={tab('creditcard.fill', 'Payment')} />
+      <Tabs.Screen name="reports" options={tab('chart.bar.fill', 'Reports')} />
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  bar: {
+    borderTopWidth: 1,
+    borderTopColor: Palette.cardBorder,
+    height: 76,
+    paddingTop: 6,
+  },
+  label: {
+    fontFamily: Font.bold,
+    fontSize: 11,
+  },
+});
